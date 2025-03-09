@@ -6,7 +6,7 @@
             $controller = new PlayerController();
             $controller->index();
         ?>
-        <h3>Editar Jugador</h3>
+        <h3 class="text-center m-4">Editar Jugador</h3>
         <?php
             if(isset($_SESSION['teamOperationResult']) && $_SESSION['teamOperationResult'] != "")
             {
@@ -14,6 +14,9 @@
                     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">'.$_SESSION['teamOperationResult'].'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
                 else
                     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$_SESSION['teamOperationResult'].'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+
+                $_SESSION['operationStatus'] = "";
+                $_SESSION['teamOperationResult'] = "";
             }               
         ?>
         <form action="../../../src/router/TeamRouter.php" method="POST" autocomplete="off" enctype="multipart/form-data">
@@ -29,11 +32,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td scope="row"><input type="text" name="name" id="playerName" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" value="<?php echo $controller->player->name; ?>" required></td>
-                        <td><input type="number" name="number" id="playerNumber" step="1" value="<?php echo $controller->player->number; ?>" required ></td>
-                        <td><input type="checkbox" name="is_captain" id="playerCaptain" <?php echo ($controller->player->is_captain ? 'checked' : '') ?>></td> 
+                        <td scope="row"><input type="text" class="border border-primary form-control" name="name" id="playerName" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" value="<?php echo $controller->player->name; ?>" required></td>
+                        <td><input type="number" class="border border-primary form-control" name="number" id="playerNumber" step="1" value="<?php echo $controller->player->number; ?>" required ></td>
+                        <td><input type="checkbox" class="border border-primary form-check-input" name="is_captain" id="playerCaptain" <?php echo ($controller->player->is_captain ? 'checked' : '') ?>></td> 
                         <td>
-                            <select name="team_id" id="playerTeam">
+                            <select name="team_id" class="border border-primary form-select" id="playerTeam">
                                 <?php
                                     foreach($teamObj->getAll() as $team)
                                     {

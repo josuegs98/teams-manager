@@ -205,7 +205,7 @@ class PlayerController
         $players = $this->model->where('team_id', $_REQUEST['team_id']);
         foreach($players as $player)
         {
-            if($player->is_captain && (isset($_REQUEST['player_id'])&& $player->id != $_REQUEST['player_id']))
+            if($player->is_captain || (isset($_REQUEST['player_id']) && $player->id != $_REQUEST['player_id']))
                 $hasCaptain = true;
         }
         return $hasCaptain;

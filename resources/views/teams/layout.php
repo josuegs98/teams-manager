@@ -5,7 +5,7 @@
             $controller->index();
         ?>
 
-        <h3>Listado de equipos</h3>
+        <h3 class="text-center m-4">Listado de equipos</h3>
         <?php
             if(isset($_SESSION['teamOperationResult']) && $_SESSION['teamOperationResult'] != "")
             {
@@ -13,10 +13,13 @@
                     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">'.$_SESSION['teamOperationResult'].'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
                 else
                     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'.$_SESSION['teamOperationResult'].'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                
+                $_SESSION['operationStatus'] = "";
+                $_SESSION['teamOperationResult'] = "";
             }               
         ?>
         
-        <table class="table">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
@@ -57,9 +60,9 @@
             <tfoot>
                 <form action="../../../src/router/TeamRouter.php" method="POST" autocomplete="off" enctype="multipart/form-data">
                     <tr>
-                        <td scope="row"><input type="text" name="name" id="teamName" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required></td>
+                        <td scope="row"><input type="text" class="border border-primary form-control" name="name" id="teamName" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required></td>
                         <td>
-                            <select name="sport_type" id="teamSportType">
+                            <select name="sport_type" class="border border-primary form-select" id="teamSportType">
                                 <option value="">-</option>
                                 <?php
                                     foreach($controller->model::TYPES as $value => $name)
@@ -69,8 +72,8 @@
                                 ?>
                             </select>
                         </td>
-                        <td><input type="text" name="city" id="teamCity" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required ></td>
-                        <td><input type="date" name="foundation_date" id="teamFoundationDate" required></td> 
+                        <td><input type="text" class="border border-primary form-control" name="city" id="teamCity" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required ></td>
+                        <td><input type="date" class="border border-primary form-control" name="foundation_date" id="teamFoundationDate" required></td> 
                         <td>
 			                <button type="reset" class="btn btn-danger">Limpiar</button>
 			                <button type="submit" class="btn btn-success">Guardar</button>

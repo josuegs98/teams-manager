@@ -23,7 +23,11 @@ class Team extends Base
     public function getCaptain($team_id)
     {
         $sql = $this->connection->query("SELECT * FROM players WHERE team_id = $team_id AND is_captain = 1");
-        return $sql->fetchAll(PDO::FETCH_CLASS)[0];
+        $captain = $sql->fetchAll(PDO::FETCH_CLASS); 
+        if(!empty($captain))
+            return $captain[0];
+        else
+            return null;
     }
 
     public function getPlayers($team_id)
