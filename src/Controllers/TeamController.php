@@ -1,6 +1,7 @@
 <?php
 
 require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'\teams-manager\src\Models\Team.php');
+require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'\teams-manager\src\Models\Player.php');
 session_start();
 
 class TeamController
@@ -8,6 +9,7 @@ class TeamController
     public $model;
     public $teams;
     public $team;
+    public $teamPlayers;
 
     public function __construct()
     {
@@ -16,7 +18,6 @@ class TeamController
 
     public function index()
     {
-        //https://codea.app/blog/mvc-en-php
         $this->teams = $this->model->getAll();
         require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'\teams-manager\resources\views\teams\layout.php');
     }
@@ -89,6 +90,7 @@ class TeamController
     public function view()
     {
         $teamId = $_REQUEST['id'];
+        $this->teamPlayers = $this->model->getPlayers($teamId);
         return $this->model->getById($teamId)[0];
     }
 }

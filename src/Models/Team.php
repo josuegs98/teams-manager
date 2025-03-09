@@ -19,4 +19,23 @@ class Team extends Base
             $config['password']
         );
     }
+
+    public function getCaptain($team_id)
+    {
+        $sql = $this->connection->query("SELECT * FROM players WHERE team_id = $team_id AND is_captain = 1");
+        return $sql->fetchAll(PDO::FETCH_CLASS)[0];
+    }
+
+    public function getPlayers($team_id)
+    {
+        $sql = $this->connection->query("SELECT * FROM players WHERE team_id = $team_id");
+        return $sql->fetchAll(PDO::FETCH_CLASS);
+    }
+
+    
+    public function getDetailedName($team_id)
+    {
+        $team = $this->getById($team_id)[0];
+        return $team->name.' / '.$this::TYPES[$team->sport_type];
+    }
 }

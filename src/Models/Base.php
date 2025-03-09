@@ -25,6 +25,13 @@ class Base
         return $sql;
     }
 
+    public function where($column, $value)
+    {
+        $sql = $this->connection->query("SELECT * FROM $this->table WHERE $column = $value");
+       
+        return $sql->fetchAll(PDO::FETCH_CLASS);
+    }
+
     public function insert($values)
     {
         $columns = "";
@@ -51,14 +58,14 @@ class Base
 
     public function update($id, $values)
     {
-        $values = "";
+        $queryValues = "";
         foreach($this->fillable as $attribute)
         {
-            $values .= "$attribute = $values[$attribute],";
+            $queryValues .= "$attribute = '$values[$attribute]',";
         }
-        $values = rtrim($values, ',');
+        $queryValues = rtrim($queryValues, ',');
 
-        $query = "UPDATE $this->table SET $values WHERE id = $id";
+        $query = "UPDATE $this->table SET $queryValues WHERE id = $id";
         try
         {
             $sql = $this->connection->query($query);

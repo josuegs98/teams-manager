@@ -11,16 +11,11 @@
 </head>
 <body>
 
-<header class="m-2 border rounded">
-    <h2 class="m-2">Teams Manager App</h2>
+<header class="m-4 border rounded">
+    <h2 class="m-4 text-center">Teams Manager App</h2>
     <hr>
-    <div class="dropdown m-4">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Menu
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/teams-manager/index.php">Inicio</a></li>
-            <li><a class="dropdown-item" href="/teams-manager/resources/views/teams/layout.php">Equipos</a></li>
-        </ul>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light m-2">
+        <a class="navbar-brand" href="/teams-manager/index.php">Inicio</a>
+        <a class="navbar-brand" href="/teams-manager/resources/views/teams/layout.php">Equipos</a>
+    </nav>
 </header>
